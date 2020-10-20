@@ -1,0 +1,55 @@
+html, body {
+  @apply font-sans;
+}
+
+// HEADINGS
+.heading-1 {
+  @apply text-2xl;
+  @apply border-b;
+  @apply border-gray-300;
+  @apply pb-2;
+  @apply mb-2;
+}
+
+// FORMS
+input[type='text'],
+input[type='date'] {
+  @apply w-full;
+  @apply appearance-none;
+  @apply rounded;
+  @apply border-2;
+  @apply border-transparent;
+  @apply bg-gray-200;
+  @apply py-2;
+  @apply px-4;
+  @apply text-gray-700;
+  @apply transition;
+  @apply ease-in-out;
+  @apply duration-300;
+
+  &:focus {
+    @apply outline-none;
+    @apply bg-white;
+    @apply border-2;
+    @apply border-purple-600;
+  }
+}
+
+input[type='date'] {
+  @apply inline-block;
+  @apply relative;
+
+  &::-webkit-calendar-picker-indicator {
+    @apply absolute;
+    right: 10px;
+  }
+}
+
+.inp-checkgroup {
+  label {
+    @apply mx-2;
+  }
+  input[type='checkbox'] {
+    @apply mr-2;
+  }
+}
