@@ -447,7 +447,7 @@ module.exports = {
       '4/12': '33.333333%',
       // '5/12': '41.666667%',
       // '6/12': '50%',
-      // '7/12': '58.333333%',
+      '7/12': '58.333333%',
       // '8/12': '66.666667%',
       '9/12': '75%',
       // '10/12': '83.333333%',
@@ -467,7 +467,7 @@ module.exports = {
     gap: theme => theme('spacing'),
     gridTemplateColumns: {
       // none: 'none',
-      // '1': 'repeat(1, minmax(0, 1fr))',
+      '1': 'repeat(1, minmax(0, 1fr))',
       '2': 'repeat(2, minmax(0, 1fr))',
       // '3': 'repeat(3, minmax(0, 1fr))',
       // '4': 'repeat(4, minmax(0, 1fr))',

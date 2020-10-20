@@ -8,11 +8,9 @@
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-  <div class="w-full">
-    <div class="w-3/12 absolute top-4 right-4">
-      <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded relative" role="alert">
-        <p class="text-sm">Event saved successfully</p>
-      </div>
+  <div class="w-7/12 md:w-4/12 lg:w-3/12 absolute top-4 right-4">
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded relative" role="alert">
+      <p class="text-sm">Event saved successfully</p>
     </div>
   </div>
 
@@ -20,12 +18,12 @@
     <h1 class="heading-1">Calendar</h1>
 
     <div class="flex flex-wrap">
-      <div class="w-3/12 mt-6">
+      <div class="w-full lg:w-3/12 mt-6">
         <label for="ev-name"> Event
           <input class="block mt-2 w-full" type="text" name="" id="ev-name">
         </label>
 
-        <div class="grid gap-4 grid-cols-2 mt-6">
+        <div class="grid gap-4 lg:grid-cols-2 mt-6">
           <div class="inline-block">
             <label for="ev-from"> From
               <input class="mt-2" type="date" min="2020-10-20" name="" id="ev-from">
@@ -53,7 +51,7 @@
         </div>
       </div>
 
-      <div class="w-9/12 mt-6 pl-10">
+      <div class="w-full lg:w-9/12 mt-10 lg:mt-6 lg:pl-10">
         <h2 class="heading-2 font-bold border-none">October 2020</h2>
 
         <div class="table w-full table-event">

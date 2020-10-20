@@ -4548,6 +4548,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
   width: 33.333333%;
 }
 
+.w-7\/12 {
+  width: 58.333333%;
+}
+
 .w-9\/12 {
   width: 75%;
 }
@@ -4709,6 +4713,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 .grid-flow-col-dense {
   grid-auto-flow: column dense;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .grid-cols-2 {
@@ -8590,6 +8598,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
     width: 33.333333%;
   }
 
+  .sm\:w-7\/12 {
+    width: 58.333333%;
+  }
+
   .sm\:w-9\/12 {
     width: 75%;
   }
@@ -8751,6 +8763,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
   .sm\:grid-flow-col-dense {
     grid-auto-flow: column dense;
+  }
+
+  .sm\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
   .sm\:grid-cols-2 {
@@ -12633,6 +12649,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
     width: 33.333333%;
   }
 
+  .md\:w-7\/12 {
+    width: 58.333333%;
+  }
+
   .md\:w-9\/12 {
     width: 75%;
   }
@@ -12794,6 +12814,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
   .md\:grid-flow-col-dense {
     grid-auto-flow: column dense;
+  }
+
+  .md\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
   .md\:grid-cols-2 {
@@ -16676,6 +16700,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
     width: 33.333333%;
   }
 
+  .lg\:w-7\/12 {
+    width: 58.333333%;
+  }
+
   .lg\:w-9\/12 {
     width: 75%;
   }
@@ -16837,6 +16865,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
   .lg\:grid-flow-col-dense {
     grid-auto-flow: column dense;
+  }
+
+  .lg\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-2 {
@@ -20719,6 +20751,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
     width: 33.333333%;
   }
 
+  .xl\:w-7\/12 {
+    width: 58.333333%;
+  }
+
   .xl\:w-9\/12 {
     width: 75%;
   }
@@ -20880,6 +20916,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
   .xl\:grid-flow-col-dense {
     grid-auto-flow: column dense;
+  }
+
+  .xl\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
   .xl\:grid-cols-2 {
