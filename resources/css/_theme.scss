@@ -3,12 +3,17 @@ html, body {
 }
 
 // HEADINGS
-.heading-1 {
+.heading-1,
+.heading-2 {
   @apply text-2xl;
   @apply border-b;
   @apply border-gray-300;
   @apply pb-2;
   @apply mb-2;
+}
+
+.heading-2 {
+  @apply text-xl;
 }
 
 // FORMS
@@ -47,9 +52,35 @@ input[type='date'] {
 
 .inp-checkgroup {
   label {
-    @apply mx-2;
+    @apply block;
+    @apply w-full;
   }
   input[type='checkbox'] {
     @apply mr-2;
+  }
+  label:active {
+    @apply outline-black;
+  }
+  label:hover {
+    @apply bg-gray-100;
+  }
+}
+
+// BUTTONS
+.btn {
+  @apply font-bold py-2 px-4 rounded;
+
+  &.btn-purple {
+    @apply text-white;
+    @apply bg-purple-600;
+  }
+}
+
+
+// TABLES
+.table-event {
+  div {
+    @apply py-2 my-1;
+    @apply border-b border-gray-300;
   }
 }
