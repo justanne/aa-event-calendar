@@ -20,36 +20,46 @@
 
       <div class="flex flex-wrap">
         <div class="w-full lg:w-3/12 mt-6">
-          <label for="ev-name"> Event
-            <input class="block mt-2 w-full" type="text" name="" id="ev-name">
-          </label>
+          <Event-Name
+            label="Event"
+            name="ev-name"
+          ></Event-Name>
 
           <div class="grid gap-4 lg:grid-cols-2 mt-6">
             @php
-              $str_thismonth = date('Y-m-d', mktime(0,0,0, date('m'), date('d', 1), date('Y')));
-              $end_thismonth = date('Y-m-t');
+              $firstday_month = date('Y-m-d', mktime(0,0,0, date('m'), date('d', 1), date('Y')));
+              $endday_month = date('Y-m-t');
             @endphp
             <div class="inline-block">
-              <label for="ev-from"> From
-                <input class="mt-2" type="date" min="{{ $str_thismonth }}" max="{{ $end_thismonth }}" name="" id="ev-from">
-              </label>
+              <Input-Date
+                min="{{ $firstday_month }}"
+                max="{{ $endday_month }}"
+                label="From"
+                name="ev-from"
+              ></Input-Date>
             </div>
             <div class="inline-block">
-              <label for="ev-to"> To
-                <input class="mt-2" type="date" min="{{ $str_thismonth }}" max="{{ $end_thismonth }}" name="" id="ev-to">
-              </label>
+              <Input-Date
+                min="{{ $firstday_month }}"
+                max="{{ $endday_month }}"
+                label="To"
+                name="ev-to"
+              ></Input-Date>
             </div>
           </div>
 
-          <div class="flex flex-wrap mt-6 inp-checkgroup">
-            <label for="ev-wk-mon"><input type="checkbox" name="" id="ev-wk-mon">Mon</label>
-            <label for="ev-wk-tue"><input type="checkbox" name="" id="ev-wk-tue">Tue</label>
-            <label for="ev-wk-wed"><input type="checkbox" name="" id="ev-wk-wed">Wed</label>
-            <label for="ev-wk-thu"><input type="checkbox" name="" id="ev-wk-thu">Thu</label>
-            <label for="ev-wk-fri"><input type="checkbox" name="" id="ev-wk-fri">Fri</label>
-            <label for="ev-wk-sat"><input type="checkbox" name="" id="ev-wk-sat">Sat</label>
-            <label for="ev-wk-sun"><input type="checkbox" name="" id="ev-wk-sun">Sun</label>
-          </div>
+          <Input-Checkbox-Group
+            :checkboxes="[
+              'Mon',
+              'Tue',
+              'Wed',
+              'Thu',
+              'Fri',
+              'Sat',
+              'Sun',
+            ]"
+            name="ev-wk"
+          ></Input-Checkbox-Group>
 
           <div class="mt-6">
             <a href="#" class="btn btn-purple">Save</a>
