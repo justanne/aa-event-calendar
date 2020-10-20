@@ -2,9 +2,10 @@ require('./bootstrap');
 
 import Vue from 'vue'
 
-import EventName from './components/EventName'
+import InputEventName from './components/InputEventName'
 import InputDate from './components/InputDate'
 import InputCheckboxGroup from './components/InputCheckboxGroup'
+import TableEventMonthly from './components/TableEventMonthly'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -16,8 +17,9 @@ Vue.config.debug         = isProd ? false : true
 new Vue({
   el: '#app',
   components: {
-    EventName,
+    InputEventName,
     InputDate,
     InputCheckboxGroup,
+    TableEventMonthly,
   },
 })

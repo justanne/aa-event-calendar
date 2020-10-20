@@ -1,8 +1,9 @@
 <template lang="pug">
   .flex.flex-wrap.mt-6.inp-checkgroup
     label(
-      v-for="checkname in checkboxes"
+      v-for="(checkname, i) in checkboxes"
       :for="name+'-'+checkname.toLowerCase()"
+      :key="checkname.toLowerCase()+i"
     )
       input(
         type="checkbox"

@@ -20,28 +20,51 @@
 
       <div class="flex flex-wrap">
         <div class="w-full lg:w-3/12 mt-6">
-          <Event-Name
+          <Input-Event-Name
             label="Event"
             name="ev-name"
-          ></Event-Name>
+          ></Input-Event-Name>
 
           <div class="grid gap-4 lg:grid-cols-2 mt-6">
             @php
-              $firstday_month = date('Y-m-d', mktime(0,0,0, date('m'), date('d', 1), date('Y')));
-              $endday_month = date('Y-m-t');
+              $thismonth         = date('m');
+              $thisyear          = date('Y');
+              $firstday          = mktime(0,0,0, $thismonth, 1, $thisyear);
+
+              $firstday_of_month = date('Y-m-d', $firstday);
+              $endday_of_month   = date('Y-m-t');
+
+              // $wkname            = date('D', strtotime($firstday_of_month));
+              $wkdays = array();
+              $startday = strtotime($firstday_of_month);
+              $endday = strtotime($endday_of_month);
+              $i = 1;
+              $day = '';
+              $runningday = '';
+
+              while ($startday < $endday) {
+                $runningday = mktime(0,0,0, $thismonth, $i, $thisyear);
+                $dayname = date('D', $runningday);
+                $dayno = date('w', $runningday);
+                $dateno = date('j', $runningday);
+                array_push($wkdays, array('dayname'=>$dayname, 'dateno'=>$dateno, 'dayno'=>$dayno));
+                $startday = $runningday;
+                $i++;
+              }
+
             @endphp
             <div class="inline-block">
               <Input-Date
-                min="{{ $firstday_month }}"
-                max="{{ $endday_month }}"
+                min="{{ $firstday_of_month }}"
+                max="{{ $endday_of_month }}"
                 label="From"
                 name="ev-from"
               ></Input-Date>
             </div>
             <div class="inline-block">
               <Input-Date
-                min="{{ $firstday_month }}"
-                max="{{ $endday_month }}"
+                min="{{ $firstday_of_month }}"
+                max="{{ $endday_of_month }}"
                 label="To"
                 name="ev-to"
               ></Input-Date>
@@ -62,17 +85,16 @@
           ></Input-Checkbox-Group>
 
           <div class="mt-6">
-            <a href="#" class="btn btn-purple">Save</a>
+            <a href="#" class="btn btn-purple text-sm">Save</a>
           </div>
         </div>
 
         <div class="w-full lg:w-9/12 mt-10 lg:mt-6 lg:pl-10">
           <h2 class="heading-2 font-bold border-none">October 2020</h2>
 
-          <div class="table w-full table-event">
-            <div class="">1 Mon</div>
-            <div class="">1 Tue</div>
-          </div>
+          <Table-Event-Monthly
+            :data="{{ json_encode($wkdays) }}"
+          ></Table-Event-Monthly>
         </div>
       </div>
 

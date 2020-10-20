@@ -718,7 +718,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-color: rgba(128, 90, 213, var(--bg-opacity));
 }
 
-.table-event div {
+.table-event > div {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   margin-top: 0.25rem;
