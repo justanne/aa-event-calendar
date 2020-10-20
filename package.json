@@ -22,6 +22,7 @@
         "tailwindcss": "^1.9.5",
         "vue": "^2.6.12",
         "vue-loader": "^15.9.3",
-        "vue-template-compiler": "^2.6.12"
+        "vue-template-compiler": "^2.6.12",
+        "vuex": "^3.5.1"
     }
 }

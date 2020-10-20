@@ -85,7 +85,7 @@
           ></Input-Checkbox-Group>
 
           <div class="mt-6">
-            <a href="#" class="btn btn-purple text-sm">Save</a>
+            <a href="#" @click.stop.prevent="saveEvent()" class="btn btn-purple text-sm">Save</a>
           </div>
         </div>
 

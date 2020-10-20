@@ -4,7 +4,8 @@
       class="block mt-2 w-full"
       type="text"
       :id="name"
-      :v-model="name"
+      v-model.lazy.trim="event_name"
+      @blur="updateEventName()"
     )
 </template>
 
@@ -16,8 +17,16 @@ export default {
   ],
   data() {
     return {
+      event_name: '',
     }
-  }
+  },
+  methods: {
+    updateEventName() {
+      if (this.event_name) {
+        this.$store.dispatch('updateEventName', this.event_name)
+      }
+    },
+  },
 }
 </script>
 

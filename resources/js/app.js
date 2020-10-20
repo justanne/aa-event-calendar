@@ -1,6 +1,7 @@
 require('./bootstrap');
 
 import Vue from 'vue'
+import store from './store/index'
 
 import InputEventName from './components/InputEventName'
 import InputDate from './components/InputDate'
@@ -15,11 +16,17 @@ Vue.config.silent        = isProd ? true  : false
 Vue.config.debug         = isProd ? false : true
 
 new Vue({
+  store,
   el: '#app',
   components: {
     InputEventName,
     InputDate,
     InputCheckboxGroup,
     TableEventMonthly,
+  },
+  methods: {
+    saveEvent() {
+      this.$store.commit('saveEvent')
+    }
   },
 })
