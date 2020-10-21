@@ -12,6 +12,7 @@ const state = {
     day: '',
   },
   save: false,
+  passed: false,
 }
 
 const mutations = {
@@ -35,7 +36,13 @@ const mutations = {
         state.save = false
       }, 1000)
     }
-  }
+  },
+  updatePassingStatus(state, payload) {
+    state.passed = payload
+    setTimeout(() => {
+      state.passed = false
+    }, 5000)
+  },
 }
 
 const getters = {}
@@ -70,15 +77,20 @@ const actions = {
       dispatch('saveDataToDB')
     }
   },
-  saveDataToDB() {
+  saveDataToDB({ commit }) {
     return new Promise((resolve, reject) => {
         Axios.post('/save-to-db', state.event)
             .then(response => {
-                console.log(response)
-                resolve(response)
+              if (response.data.passes) {
+                commit('updatePassingStatus', response.data.passes)
+              }
+              else {
+                console.error(response.error)
+              }
+              resolve(response)
             })
             .catch(err => {
-                console.log(err)
+                console.error(response.error)
                 reject(err)
             })
     })

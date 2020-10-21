@@ -9,7 +9,7 @@
 </head>
 <body>
   <div id="app">
-    <div class="w-7/12 md:w-4/12 lg:w-3/12 absolute top-4 right-4">
+    <div v-show="passed" class="w-7/12 md:w-4/12 lg:w-3/12 absolute top-4 right-4">
       <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded relative" role="alert">
         <p class="text-sm">Event saved successfully</p>
       </div>

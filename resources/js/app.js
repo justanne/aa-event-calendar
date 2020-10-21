@@ -8,6 +8,8 @@ import InputDate from './components/InputDate'
 import InputCheckboxGroup from './components/InputCheckboxGroup'
 import TableEventMonthly from './components/TableEventMonthly'
 
+import { mapState } from 'vuex'
+
 const isProd = process.env.NODE_ENV === 'production'
 
 Vue.config.devtools      = isProd ? false : true
@@ -23,6 +25,11 @@ new Vue({
     InputDate,
     InputCheckboxGroup,
     TableEventMonthly,
+  },
+  computed: {
+    ...mapState([
+      'passed'
+    ])
   },
   methods: {
     saveEvent() {

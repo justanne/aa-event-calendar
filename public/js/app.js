@@ -39901,7 +39901,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_InputDate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/InputDate */ "./resources/js/components/InputDate.vue");
 /* harmony import */ var _components_InputCheckboxGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/InputCheckboxGroup */ "./resources/js/components/InputCheckboxGroup.vue");
 /* harmony import */ var _components_TableEventMonthly__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TableEventMonthly */ "./resources/js/components/TableEventMonthly.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
 
 
 
@@ -39923,6 +39931,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     InputCheckboxGroup: _components_InputCheckboxGroup__WEBPACK_IMPORTED_MODULE_4__["default"],
     TableEventMonthly: _components_TableEventMonthly__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapState"])(['passed'])),
   methods: {
     saveEvent: function saveEvent() {
       this.$store.dispatch('saveEventDetails');
@@ -40265,7 +40274,8 @@ var state = {
     to: '',
     day: ''
   },
-  save: false
+  save: false,
+  passed: false
 };
 var mutations = {
   updateEventName: function updateEventName(state, payload) {
@@ -40287,6 +40297,12 @@ var mutations = {
         state.save = false;
       }, 1000);
     }
+  },
+  updatePassingStatus: function updatePassingStatus(state, payload) {
+    state.passed = payload;
+    setTimeout(function () {
+      state.passed = false;
+    }, 5000);
   }
 };
 var getters = {};
@@ -40332,10 +40348,16 @@ var actions = {
       dispatch('saveDataToDB');
     }
   },
-  saveDataToDB: function saveDataToDB() {
+  saveDataToDB: function saveDataToDB(_ref4) {
+    var commit = _ref4.commit;
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/save-to-db', state.event).then(function (response) {
-        console.log(response);
+        if (response.data.passes) {
+          commit('updatePassingStatus', response.data.passes);
+        } else {
+          console.error(response.error);
+        }
+
         resolve(response);
       })["catch"](function (err) {
         console.log(err);
