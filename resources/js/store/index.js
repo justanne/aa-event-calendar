@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -62,7 +63,26 @@ const actions = {
       default:
         return false
     }
-  }
+  },
+  saveEventDetails({ state, commit, dispatch }) {
+    commit('saveEventDetails')
+    if (state.event) {
+      dispatch('saveDataToDB')
+    }
+  },
+  saveDataToDB() {
+    return new Promise((resolve, reject) => {
+        Axios.post('/save-to-db', state.event)
+            .then(response => {
+                console.log(response)
+                resolve(response)
+            })
+            .catch(err => {
+                console.log(err)
+                reject(err)
+            })
+    })
+  },
 }
 
 export default new Vuex.Store({

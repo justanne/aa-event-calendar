@@ -16,7 +16,7 @@ class CreateEventDays extends Migration
         Schema::create('selected_days', function (Blueprint $table) {
             $table->integer('uid');
             $table->string('days');
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
         });
     }
 

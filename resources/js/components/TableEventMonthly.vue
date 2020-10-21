@@ -5,7 +5,7 @@
       :key="datum+i"
       :class="{ 'bg-green-100': (days_selected.includes(datum.dateno.toLowerCase())) }"
     )
-      span(class="inline-block w-3/12") {{ datum.dateno +' '+ datum.dayname }}
+      span(class="inline-block w-3/12 pl-4") {{ datum.dateno +' '+ datum.dayname }}
       span(class="inline-block w-9/12") {{ (days_selected.includes(datum.dateno.toLowerCase())) ? event_details.name : '' }}
 </template>
 

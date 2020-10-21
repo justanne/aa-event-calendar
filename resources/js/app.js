@@ -26,7 +26,7 @@ new Vue({
   },
   methods: {
     saveEvent() {
-      this.$store.commit('saveEventDetails')
+      this.$store.dispatch('saveEventDetails')
     }
   },
 })

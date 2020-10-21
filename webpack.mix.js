@@ -3,7 +3,7 @@ const tailwindcss = require('tailwindcss');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/css/app.scss', 'public/css')
-    .extract(['vue', 'axios'])
+    .extract(['vue', 'axios', 'vuex'])
     .options(
         {
             processCssUrls: false,
