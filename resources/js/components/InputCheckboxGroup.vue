@@ -8,6 +8,7 @@
       input(
         type="checkbox"
         :id="name+'-'+checkname.toLowerCase()"
+        v-model="checked_value[checkname]"
       )
       | {{ checkname }}
 </template>
@@ -18,6 +19,20 @@ export default {
     checkboxes: Array,
     name: String,
   },
+  data() {
+    return {
+      checked_name: '',
+      checked_value: [],
+    }
+  },
+  watch: {
+    checked_value: {
+      deep: true,
+      handler: function(n,o) {
+        console.log(n.value)
+      }
+    },
+  }
 }
 </script>
 

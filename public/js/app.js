@@ -23,10 +23,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     checkboxes: Array,
     name: String
+  },
+  data: function data() {
+    return {
+      checked_name: '',
+      checked_value: []
+    };
+  },
+  watch: {
+    checked_value: {
+      deep: true,
+      handler: function handler(n, o) {
+        console.log(n.value);
+      }
+    }
   }
 });
 
@@ -122,13 +137,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['data'],
   data: function data() {
     return {
       event_details: {
-        name: ''
+        name: '',
+        from: '',
+        to: '',
+        day: ''
       }
     };
   },
@@ -144,7 +163,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     event: {
       deep: true,
       handler: function handler(n, o) {
+        console.log(n);
         this.event_details.name = n.name;
+        this.event_details.day = n.day;
       }
     }
   }
@@ -17812,9 +17833,46 @@ var render = function() {
         },
         [
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.checked_value[checkname],
+                expression: "checked_value[checkname]"
+              }
+            ],
             attrs: {
               type: "checkbox",
               id: _vm.name + "-" + checkname.toLowerCase()
+            },
+            domProps: {
+              checked: Array.isArray(_vm.checked_value[checkname])
+                ? _vm._i(_vm.checked_value[checkname], null) > -1
+                : _vm.checked_value[checkname]
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.checked_value[checkname],
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 &&
+                      _vm.$set(_vm.checked_value, checkname, $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      _vm.$set(
+                        _vm.checked_value,
+                        checkname,
+                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                      )
+                  }
+                } else {
+                  _vm.$set(_vm.checked_value, checkname, $$c)
+                }
+              }
             }
           }),
           _vm._v(_vm._s(checkname))
@@ -17933,14 +17991,18 @@ var render = function() {
     "div",
     { staticClass: "table w-full table-event" },
     _vm._l(_vm.data, function(datum, i) {
-      return _c("div", { key: datum + i }, [
-        _c("span", { staticClass: "inline-block w-3/12" }, [
-          _vm._v(_vm._s(datum.dateno + " " + datum.dayname))
-        ]),
-        _c("span", { staticClass: "inline-block w-9/12" }, [
-          _vm._v(_vm._s(_vm.event_details.name))
-        ])
-      ])
+      return _c(
+        "div",
+        { key: datum + i, class: { "bg-green-100": _vm.event_details.name } },
+        [
+          _c("span", { staticClass: "inline-block w-3/12" }, [
+            _vm._v(_vm._s(datum.dateno + " " + datum.dayname))
+          ]),
+          _c("span", { staticClass: "inline-block w-9/12" }, [
+            _vm._v(_vm._s(_vm.event_details.name))
+          ])
+        ]
+      )
     }),
     0
   )
@@ -19672,7 +19734,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************************************************!*\
   !*** ./resources/js/components/InputEventName.vue?vue&type=template&id=96ccd574&lang=pug& ***!
   \********************************************************************************************/
-/*! no static exports found */
+/*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

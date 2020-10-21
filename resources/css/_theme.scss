@@ -80,7 +80,7 @@ input[type='date'] {
 // TABLES
 .table-event {
   > div {
-    @apply py-2 my-1;
+    @apply py-2;
     @apply border-b border-gray-300;
   }
 }
