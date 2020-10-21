@@ -32,7 +32,7 @@ const mutations = {
 
       setTimeout(() => {
         state.save = false
-      }, 2000)
+      }, 1000)
     }
   }
 }

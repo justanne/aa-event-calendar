@@ -57,7 +57,6 @@ export default {
     },
     updateEventPayload() {
       this.event_payload.event_value = this.checked_values
-      console.log(this.event_payload)
     },
   },
 }

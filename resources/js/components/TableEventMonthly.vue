@@ -3,24 +3,28 @@
     div(
       v-for="(datum, i) in data"
       :key="datum+i"
-      :class="{ 'bg-green-100': event_details.name }"
+      :class="{ 'bg-green-100': (days_selected.includes(datum.dateno.toLowerCase())) }"
     )
       span(class="inline-block w-3/12") {{ datum.dateno +' '+ datum.dayname }}
-      span(class="inline-block w-9/12") {{ event_details.name }}
+      span(class="inline-block w-9/12") {{ (days_selected.includes(datum.dateno.toLowerCase())) ? event_details.name : '' }}
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import moment from 'moment'
 
 export default {
   props: ['data'],
   data() {
     return {
+      dayfrom: '',
+      dayto: '',
+      days_selected: [],
       event_details: {
         name: '',
         from: '',
         to: '',
-        day: '',
+        day: [],
       },
     }
   },
@@ -32,19 +36,39 @@ export default {
   },
   watch: {
     save: function(n,o) {
-      console.log('Saved? ', n)
       if(n === true) {
-        this.event_name_saved = this.event_details.name
+        this.event_details = this.event
+
+        this.dayfrom = moment(this.event_details.from).get('date')
+        this.dayto = moment(this.event_details.to).get('date')
+        this.days_selected = []
+
+        this.showEventName()
       }
     },
-    event: {
-      deep: true,
-      handler(n,o) {
-        console.log(n)
-        this.event_details.name = n.name
-        this.event_details.day = n.day
+  },
+  methods: {
+    showEventName() {
+      for (let day = 0; this.dayfrom <= this.dayto; this.dayfrom++) {
+        this.data.forEach(daydetails => {
+          this.filterDateNo(daydetails)
+        })
       }
-    }
+    },
+    filterDateNo(daydetails) {
+      if (this.dayfrom === parseInt(daydetails.dateno)) {
+        this.filterDateName(daydetails)
+      }
+      return true
+    },
+    filterDateName(daydetails) {
+      let dayname = daydetails.dayname.toLowerCase()
+
+      if (this.event_details.day.includes(dayname)) {
+        this.days_selected.push(daydetails.dateno)
+      }
+      return true
+    },
   },
 }
 </script>
