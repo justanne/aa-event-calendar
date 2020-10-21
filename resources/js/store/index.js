@@ -15,16 +15,23 @@ const state = {
 
 const mutations = {
   updateEventName(state, payload) {
-    state.event.name = payload
+    state.event.name = payload.event_value
   },
-  saveEvent(state) {
+  updateEventDay(state, payload) {
+    state.event.day = payload.event_value
+  },
+  updateEventFrom(state, payload) {
+    state.event.from = payload.event_value
+  },
+  updateEventTo(state, payload) {
+    state.event.to = payload.event_value
+  },
+  saveEventDetails(state) {
     if (state.save === false) {
       state.save = true
-      console.log(state.save)
 
       setTimeout(() => {
         state.save = false
-        console.log(state.save)
       }, 2000)
     }
   }
@@ -36,6 +43,24 @@ const actions = {
   updateEventName({ commit }, payload) {
     if (payload) {
       commit('updateEventName', payload)
+    }
+  },
+  updateEventDetails({ commit }, payload) {
+    switch (payload.event_type) {
+      case 'eventname':
+        commit('updateEventName', payload)
+        break
+      case 'eventday':
+        commit('updateEventDay', payload)
+        break
+      case 'eventfrom':
+        commit('updateEventFrom', payload)
+        break
+      case 'eventto':
+        commit('updateEventTo', payload)
+        break
+      default:
+        return false
     }
   }
 }

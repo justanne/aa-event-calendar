@@ -9,6 +9,13 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -24,6 +31,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     checkboxes: Array,
@@ -31,16 +39,41 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      checked_name: '',
-      checked_value: []
+      checked_values: [],
+      event_payload: {
+        event_type: 'eventday',
+        event_value: ''
+      }
     };
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['save'])),
   watch: {
-    checked_value: {
-      deep: true,
-      handler: function handler(n, o) {
-        console.log(n.value);
-      }
+    save: function save(n, o) {
+      return n ? this.$store.dispatch('updateEventDetails', this.event_payload) : false;
+    }
+  },
+  methods: {
+    updateCheckedValues: function updateCheckedValues(value, event) {
+      event.target.checked ? this.checked_values.push(value) : this.removeUnchecked(value);
+      this.updateEventPayload();
+    },
+    removeUnchecked: function removeUnchecked(value) {
+      var _this = this;
+
+      this.checked_values.forEach(function (v) {
+        if (v === value) {
+          var index = _this.checked_values.indexOf(value);
+
+          _this.checked_values.splice(index, 1);
+
+          return false;
+        }
+      });
+      this.updateEventPayload();
+    },
+    updateEventPayload: function updateEventPayload() {
+      this.event_payload.event_value = this.checked_values;
+      console.log(this.event_payload);
     }
   }
 });
@@ -56,6 +89,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -67,8 +107,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'label', 'min', 'max']
+  props: ['name', 'label', 'min', 'max'],
+  data: function data() {
+    return {
+      event_inputdate: '',
+      event_payload: {
+        event_type: '',
+        event_value: ''
+      }
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['save'])),
+  mounted: function mounted() {
+    if (this.name === 'ev-from') {
+      this.event_payload.event_type = 'eventfrom';
+    } else if (this.name === 'ev-to') {
+      this.event_payload.event_type = 'eventto';
+    }
+  },
+  watch: {
+    save: function save(n, o) {
+      return n ? this.$store.dispatch('updateEventDetails', this.event_payload) : false;
+    }
+  },
+  methods: {
+    updateDateValues: function updateDateValues() {
+      if (this.event_inputdate) {
+        this.event_payload.event_value = this.event_inputdate;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -82,6 +154,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -92,18 +171,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['name', 'label'],
   data: function data() {
     return {
-      event_name: ''
+      event_name: '',
+      event_payload: {
+        event_type: 'eventname',
+        event_value: ''
+      }
     };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['save'])),
+  watch: {
+    save: function save(n, o) {
+      if (n) this.updateEventName();
+    }
   },
   methods: {
     updateEventName: function updateEventName() {
       if (this.event_name) {
-        this.$store.dispatch('updateEventName', this.event_name);
+        this.event_payload.event_value = this.event_name;
+        this.$store.dispatch('updateEventDetails', this.event_payload);
       }
     }
   }
@@ -17833,45 +17923,14 @@ var render = function() {
         },
         [
           _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.checked_value[checkname],
-                expression: "checked_value[checkname]"
-              }
-            ],
             attrs: {
               type: "checkbox",
               id: _vm.name + "-" + checkname.toLowerCase()
             },
-            domProps: {
-              checked: Array.isArray(_vm.checked_value[checkname])
-                ? _vm._i(_vm.checked_value[checkname], null) > -1
-                : _vm.checked_value[checkname]
-            },
             on: {
-              change: function($event) {
-                var $$a = _vm.checked_value[checkname],
-                  $$el = $event.target,
-                  $$c = $$el.checked ? true : false
-                if (Array.isArray($$a)) {
-                  var $$v = null,
-                    $$i = _vm._i($$a, $$v)
-                  if ($$el.checked) {
-                    $$i < 0 &&
-                      _vm.$set(_vm.checked_value, checkname, $$a.concat([$$v]))
-                  } else {
-                    $$i > -1 &&
-                      _vm.$set(
-                        _vm.checked_value,
-                        checkname,
-                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                      )
-                  }
-                } else {
-                  _vm.$set(_vm.checked_value, checkname, $$c)
-                }
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.updateCheckedValues(checkname.toLowerCase(), $event)
               }
             }
           }),
@@ -17907,8 +17966,28 @@ var render = function() {
   return _c("label", { attrs: { for: _vm.name } }, [
     _vm._v(_vm._s(_vm.label)),
     _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.event_inputdate,
+          expression: "event_inputdate"
+        }
+      ],
       staticClass: "mt-2",
-      attrs: { type: "date", min: _vm.min, max: _vm.max, id: _vm.name }
+      attrs: { type: "date", min: _vm.min, max: _vm.max, id: _vm.name },
+      domProps: { value: _vm.event_inputdate },
+      on: {
+        change: function($event) {
+          return _vm.updateDateValues()
+        },
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.event_inputdate = $event.target.value
+        }
+      }
     })
   ])
 }
@@ -17950,16 +18029,11 @@ var render = function() {
       attrs: { type: "text", id: _vm.name },
       domProps: { value: _vm.event_name },
       on: {
-        blur: [
-          function($event) {
-            return _vm.updateEventName()
-          },
-          function($event) {
-            return _vm.$forceUpdate()
-          }
-        ],
         change: function($event) {
           _vm.event_name = $event.target.value.trim()
+        },
+        blur: function($event) {
+          return _vm.$forceUpdate()
         }
       }
     })
@@ -19502,7 +19576,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   },
   methods: {
     saveEvent: function saveEvent() {
-      this.$store.commit('saveEvent');
+      this.$store.commit('saveEventDetails');
     }
   }
 });
@@ -19843,15 +19917,22 @@ var state = {
 };
 var mutations = {
   updateEventName: function updateEventName(state, payload) {
-    state.event.name = payload;
+    state.event.name = payload.event_value;
   },
-  saveEvent: function saveEvent(state) {
+  updateEventDay: function updateEventDay(state, payload) {
+    state.event.day = payload.event_value;
+  },
+  updateEventFrom: function updateEventFrom(state, payload) {
+    state.event.from = payload.event_value;
+  },
+  updateEventTo: function updateEventTo(state, payload) {
+    state.event.to = payload.event_value;
+  },
+  saveEventDetails: function saveEventDetails(state) {
     if (state.save === false) {
       state.save = true;
-      console.log(state.save);
       setTimeout(function () {
         state.save = false;
-        console.log(state.save);
       }, 2000);
     }
   }
@@ -19863,6 +19944,30 @@ var actions = {
 
     if (payload) {
       commit('updateEventName', payload);
+    }
+  },
+  updateEventDetails: function updateEventDetails(_ref2, payload) {
+    var commit = _ref2.commit;
+
+    switch (payload.event_type) {
+      case 'eventname':
+        commit('updateEventName', payload);
+        break;
+
+      case 'eventday':
+        commit('updateEventDay', payload);
+        break;
+
+      case 'eventfrom':
+        commit('updateEventFrom', payload);
+        break;
+
+      case 'eventto':
+        commit('updateEventTo', payload);
+        break;
+
+      default:
+        return false;
     }
   }
 };
